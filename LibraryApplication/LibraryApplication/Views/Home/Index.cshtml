@@ -32,24 +32,26 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Title)
+            <!--@Html.DisplayFor(modelItem => item.Title)-->
+            @item.Title
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Writer)
+            @item.Writer
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Summary)
+            @item.Summary
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Publisher)
+            @item.Publisher
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.PublishedDate)
+            @item.PublishedDate
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.BookId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.BookId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.BookId })
+            <a href="/Home/Edit/@item.BookId">수정</a>
+            <!--@Html.ActionLink("Edit", "Edit", new { id=item.BookId })--> |
+            @Html.ActionLink("Details", "Details", new { id = item.BookId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.BookId })
         </td>
     </tr>
 }
