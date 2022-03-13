@@ -2,6 +2,10 @@
 
 @{
     ViewBag.Title = "Index";
+    int pageNum = ViewBag.Page ?? 1;
+    int totalCount = ViewBag.TotalCount ?? 0;
+    int maxListCount = ViewBag.MaxListCount ?? 1;
+    int totalPageCount =Convert.ToInt32(Math.Ceiling((double)totalCount / maxListCount));
 }
 
 <h2>Index</h2>
@@ -57,3 +61,13 @@
 }
 
 </table>
+
+<div class="text-center">
+    <div class="btn-group">
+        @for (int i = 1; i <= totalPageCount; i++)
+        {
+            <a class="btn btn-@(pageNum ==i ? "primary" : "defalut")" href="?page=@i">@i</a>
+        }
+
+    </div>
+</div>

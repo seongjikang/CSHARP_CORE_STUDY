@@ -18,7 +18,20 @@ namespace LibraryApplication.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View(db.Books.ToList());
+            int maxListCount = 3;
+            int pageNum = 1;
+
+            if(Request.QueryString["page"] != null)
+            {
+                pageNum= Convert.ToInt32(Request.QueryString["page"]);  
+            }
+
+            var books = db.Books.OrderBy(x => x.BookId).Skip((pageNum -1) * maxListCount).Take(maxListCount).ToList();
+            ViewBag.Page = pageNum;
+            ViewBag.TotalCount = db.Books.Count();
+            ViewBag.MaxListCount = maxListCount;
+
+            return View(books);
         }
 
         // GET: Home/Details/5
@@ -61,7 +74,7 @@ namespace LibraryApplication.Controllers
 
         // GET: Home/Edit/5
         public ActionResult Edit(int? id)
-        {
+        { 
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
